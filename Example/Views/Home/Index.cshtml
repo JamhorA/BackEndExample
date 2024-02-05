@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    var users = ViewBag.Users as IEnumerable<Example.Models.Entities.UserEntity>; // Se till att casta till rätt typ
+}
+
+<div class="text-center">
+    <h1 class="display-4">Users</h1>
+
+        @foreach (var user in users!)
+        {
+        <div style="margin: 20px; border: 1px solid black; display: inline-block">
+            @foreach (var image in user.UserImages)
+            {
+                <img src="@image.Image?.ImageUrl" alt="@user.FirstName" style="width: 100px; aspect-ratio: 1/1; padding: 10px; border-radius: 50%;" />
+            }
+
+            <h6 style="padding: 5px;">Användarnamn: @user.FirstName @user.LastName</h6>
+            <div style="padding: 5px;">E-post: @user.Email</div>
+            <div style="padding: 5px;">Telefonnummer: @user.PhoneNumber</div>
+
+
+            <h6 style="padding: 5px;">Adresser:</h6>
+
+            @foreach (var address in user.UserAddresses)
+            {
+                <div style="display: flex; justify-content: center;">
+                    <div style="padding: 5px;">Gata: @address.Address.Street</div>
+                    <div style="padding: 5px;">Stad: @address.Address.City</div>
+                    <div style="padding: 5px;">Land: @address.Address.Country</div>
+                </div>
+            }
+        </div>
+        }
+
+</div>

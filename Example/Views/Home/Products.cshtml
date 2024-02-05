@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Products Page";
+    var products = ViewBag.Products as IEnumerable<Example.Models.Entities.ProductEntity>; // Se till att casta till rätt typ
+}
+
+<div class="text-center">
+    <h1 class="display-4">Products</h1>
+
+    @foreach (var product in products!)
+    {
+        <div style="margin: 20px; padding: 10px; border: 1px solid black; display: inline-block; min-width: 300px;">
+            @foreach (var image in product.ProductImages)
+            {
+                <img src="@image.Image?.ImageUrl" alt="@product.ProductName" style="width: 100px; aspect-ratio: 1/1; padding: 10px; border-radius: 50%;" />
+            }
+            <h6 style="padding: 5px;">Product: @product.ProductName</h6>
+            @foreach (var size in product.ProductSizes)
+            {
+                <div style="display: flex; justify-content: center;">
+                    <div style="padding: 5px;">Size: @size.Size.SizeName</div>
+                </div>
+            }
+            @foreach (var category in product.ProductCategories)
+            {
+                <div style="display: flex; justify-content: center;">
+                    <div style="padding: 5px;">Category: @category.Category.CategoryName</div>
+                </div>
+            }
+        </div>
+    }
+
+</div>
